@@ -69,7 +69,7 @@ public class SynthPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.Get(OVRInput.Button.One))
+        /*if (OVRInput.Get(OVRInput.Button.One))
         {
             gain = volume;
         }
@@ -80,7 +80,7 @@ public class SynthPlayer : MonoBehaviour
         if (OVRInput.GetDown(OVRInput.Button.Two))
         { 
             frequency += frequency;
-        }
+        }*/
     }
     private double w(double dHertz)
     {

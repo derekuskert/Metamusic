@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Spline : MonoBehaviour
 {
+    [SerializeField]
+    private SynthPlayer Synth;
+
+    private OVRPassthroughLayer passthroughLayer;
+
     private Vector3[] splinePoint;
     private int splineCount;
 
@@ -14,10 +19,14 @@ public class Spline : MonoBehaviour
 
     public new LineRenderer Line;
 
+    public Transform objectToFollow;
+
     private void Start()
     {
         splineCount = transform.childCount;
         splinePoint = new Vector3[splineCount];
+
+        passthroughLayer = FindObjectOfType<OVRPassthroughLayer>();
     }
 
 
@@ -37,13 +46,17 @@ public class Spline : MonoBehaviour
         Line.SetPosition(1, splinePoint[2]);
 
         UpdateMeshes();
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.name == "OVRControllerPrefab")
+        if (isInteractedWith)
         {
-            isInteractedWith = true;
+            UpdateSynthPitch();
+            passthroughLayer.edgeRenderingEnabled = true;
+            Synth.gain = Synth.volume;
+        }
+        else
+        {
+            passthroughLayer.edgeRenderingEnabled = false;
+            Synth.gain = 0;
         }
     }
 
@@ -60,20 +73,16 @@ public class Spline : MonoBehaviour
         }
         else
         {
-            transform.GetChild(1).position = Vector3.zero; //GameObject.Find("RightHandAnchor").transform.position;
+            transform.GetChild(1).position = objectToFollow.position; //GameObject.Find("RightHandAnchor").transform.position;
         }
     }
 
-    //Used when creating the spline and when grabbing in the middle of the spline
-    public void AttachNewPoint(Vector3 SpawnLocation)
+    private void UpdateSynthPitch()
     {
-        
-    }
-
-    //Used when the player lets go of the spline
-    public void ReturnControlPoint()
-    {
-        
+        Synth.frequency = Mathf.Lerp(10, 11000,
+            Mathf.Clamp((Vector3.Distance(transform.GetChild(0).position, transform.GetChild(1).position) - 
+            Vector3.Distance(transform.GetChild(2).position, transform.GetChild(1).position)) / 
+            Vector3.Distance(transform.GetChild(2).position, transform.GetChild(0).position), 0, 1));
     }
 
     private void UpdateMeshes()
