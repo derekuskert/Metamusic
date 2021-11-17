@@ -14,6 +14,44 @@ public class SynthPlayer : MonoBehaviour
 
     public float gain;
     public float volume = 0.1f;
+
+    struct EnvelopeADSR
+    {
+        public double attackTime;
+        public double delayTime;
+        public double releaseTime;
+
+        public double sustainAmplitude;
+        public double startAmplitude;
+
+        public double triggerOnTime;
+        public double triggerOffTime;
+
+        
+    }
+
+    EnvelopeADSR envelope;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        passthroughLayer = FindObjectOfType<OVRPassthroughLayer>();
+        passthroughLayer.edgeRenderingEnabled = true;
+
+        envelope.attackTime = 0.01;
+        envelope.delayTime = 0.0001;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        passthroughLayer.edgeColor = Color.HSVToRGB(Mathf.InverseLerp(0, 15000, (float)frequency), 1.0f, gain * 10);
+    }
+    private double w(double dHertz)
+    {
+        return dHertz * 2.0 * Mathf.PI;
+    }
+
     private double Oscillator(double dHertz, int nType)
     {
         switch (nType)
@@ -57,23 +95,5 @@ public class SynthPlayer : MonoBehaviour
                 phase = 0.0;
             }
         }
-    }
-
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        passthroughLayer = FindObjectOfType<OVRPassthroughLayer>();
-        passthroughLayer.edgeRenderingEnabled = true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        passthroughLayer.edgeColor = Color.HSVToRGB(Mathf.InverseLerp(0, 15000, (float)frequency), 1.0f, gain * 10);
-    }
-    private double w(double dHertz)
-    {
-        return dHertz * 2.0 * Mathf.PI;
     }
 }

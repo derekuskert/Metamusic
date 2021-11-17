@@ -70,10 +70,10 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Transparency: 1
+    - _Transparency: 0.304
     - _UVSec: 0
     - _WireThickness: 570
-    - _Wireframe: 0.00038
+    - _Wireframe: 0.00017
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.46925062, g: 0.8962264, b: 0.79204494, a: 1}
