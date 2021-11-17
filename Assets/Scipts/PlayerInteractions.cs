@@ -7,6 +7,8 @@ public class PlayerInteractions : MonoBehaviour
     Spline OverlappingSplineScript;
     Spline SelectedSplineScript;
 
+    private bool flip = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,20 +43,28 @@ public class PlayerInteractions : MonoBehaviour
     //Tells the spline that it's being interacted with and gives it the position to attach to.
     void Grab()
     {
+        if (flip) return;
+
+        flip = true;
         if (!OverlappingSplineScript) return;
 
         SelectedSplineScript = OverlappingSplineScript;
 
         SelectedSplineScript.isInteractedWith = true;
         SelectedSplineScript.objectToFollow = transform;
+        SelectedSplineScript.InteractSynthNote();
     }
 
     //Derefernces the spline and tells the spline that it's no longer being interacted with.
     void Release()
     {
+        if (!flip) return;
+
+        flip = false;
         if (!SelectedSplineScript) return;
 
         SelectedSplineScript.isInteractedWith = false;
+        SelectedSplineScript.InteractSynthNote();
         SelectedSplineScript = null;
     }
 }

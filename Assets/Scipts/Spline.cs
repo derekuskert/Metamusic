@@ -14,8 +14,7 @@ public class Spline : MonoBehaviour
     private int splineCount;
 
     private GameObject NewSplinePoint;
-
-    public bool debug_drawspline = true;
+    
     public bool isInteractedWith = false;
 
     public new LineRenderer Line;
@@ -61,6 +60,17 @@ public class Spline : MonoBehaviour
         }
     }
 
+    public void InteractSynthNote()
+    {
+        if (isInteractedWith)
+        {
+            Synth.NoteOn(Time.time);
+        }
+        else
+        {
+            Synth.NoteOff(Time.time);
+        }
+    }
     private void UpdateSplinePointLocations()
     {
         for (int i = 0; i < splineCount; i++)
@@ -83,6 +93,7 @@ public class Spline : MonoBehaviour
         //Creates a value of -1 to 1 by calculating the 'control point' between the 2 ending points.
         //This is then plugged into an inverse lerp which will produce a value between 0 and 1 for the lerp to use for determining the
         //frequency of the synth
+        
         Synth.frequency = Mathf.Lerp(10, 11000,Mathf.InverseLerp(-1, 1,(
                 Vector3.Distance(transform.GetChild(2).position, transform.GetChild(1).position) - 
                 Vector3.Distance(transform.GetChild(0).position, transform.GetChild(1).position)
