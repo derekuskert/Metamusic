@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class SplineBuilder : MonoBehaviour
 {
-    private float defaultLength = 3.0f;
-    private LineRenderer LineRenderer = null;
-    RaycastHit hit;
+    private const float DefaultLength = 3.0f;
+    private LineRenderer _lineRenderer = null;
+    private RaycastHit _hit;
 
-    bool flip;
+    private bool _flip;
 
-    private GameObject newSpline = null;
+    private GameObject _newSpline = null;
 
     public GameObject splinePrefab;
 
-    private int SplineSpawnCount = 0;
+    private int _splineSpawnCount = 0;
 
     private void Awake()
     {
-        LineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer = GetComponent<LineRenderer>();
     }
 
     // Start is called before the first frame update
@@ -30,53 +30,61 @@ public class SplineBuilder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (OVRInput.GetDown(OVRInput.Button.One))
+        {
+            if (_hit.transform.root.gameObject.GetComponent<Spline>())
+            {
+                Destroy(_hit.transform.root.gameObject);
+            }
+        }
         if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0.5 || Input.GetKeyDown(KeyCode.Space))
         {
-            if (flip)
+            if (_flip)
             {
-                if (newSpline == null)
+                if (_newSpline == null)
                 {
-                    LineRenderer.startColor = Color.red;
-                    newSpline = Instantiate(splinePrefab, hit.point, Quaternion.identity);
-                    newSpline.name = "Spline" + SplineSpawnCount++.ToString();
+                    _lineRenderer.startColor = Color.red;
+                    _newSpline = Instantiate(splinePrefab, _hit.point, Quaternion.identity);
+                    _newSpline.name = "Spline" + _splineSpawnCount++.ToString();
                 }
                 else
                 {
-                    LineRenderer.startColor = Color.green;
-                    newSpline = null;
+                    _lineRenderer.startColor = Color.green;
+                    _newSpline = null;
                 }
-                flip = false;
+                _flip = false;
             }
         }
         else if(OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) < 0.1)
         {
-            flip = true;
+            _flip = true;
         }
-        if (newSpline != null)
+        if (_newSpline != null)
         {
-            LineRenderer.startColor = Color.red;
-            GameObject.Find(newSpline.name).transform.GetChild(2).position = hit.point;
+            _lineRenderer.startColor = Color.red;
+            GameObject.Find(_newSpline.name).transform.GetChild(2).position = _hit.point;
         }
         UpdateLength();
     }
     private void UpdateLength()
     {
-        LineRenderer.SetPosition(0, transform.position);
-        LineRenderer.SetPosition(1, CalculateEnd());
+        _lineRenderer.SetPosition(0, transform.position);
+        _lineRenderer.SetPosition(1, CalculateEnd());
     }
 
     private RaycastHit CreateForwardRaycast()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
+        var transform1 = transform;
+        Ray ray = new Ray(transform1.position, transform1.forward);
 
-        Physics.Raycast(ray, out hit, defaultLength);
-        return hit;
+        Physics.Raycast(ray, out _hit, DefaultLength);
+        return _hit;
     }
 
     private Vector3 CalculateEnd()
     {
         RaycastHit hit = CreateForwardRaycast();
-        Vector3 endPosition = DefaultEnd(defaultLength);
+        Vector3 endPosition = DefaultEnd(DefaultLength);
 
         if (hit.collider)
         {
@@ -88,6 +96,7 @@ public class SplineBuilder : MonoBehaviour
 
     private Vector3 DefaultEnd(float length)
     {
-        return transform.position + (transform.forward * length);
+        var transform1 = transform;
+        return transform1.position + (transform1.forward * length);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -95,5 +96,11 @@ public class SynthPlayer : MonoBehaviour
                 phase = 0.0;
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        passthroughLayer.edgeColor = Color.black;
+        throw new NotImplementedException();
     }
 }
