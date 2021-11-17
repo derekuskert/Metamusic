@@ -1960,11 +1960,6 @@ public class OVRManager : MonoBehaviour, OVRMixedRealityCaptureConfiguration
 		display.Update();
 		OVRInput.Update();
 
-        if (OVRInput.Get(OVRInput.Button.One))
-        {
-			Button1Pressed();
-		}else { passthroughLayer.edgeRenderingEnabled = false; }
-
 		UpdateHMDEvents();
 
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || OVR_ANDROID_MRC
@@ -1982,11 +1977,6 @@ public class OVRManager : MonoBehaviour, OVRMixedRealityCaptureConfiguration
 		}
 	}
 
-	private void Button1Pressed()
-    {
-		passthroughLayer.edgeRenderingEnabled = true;
-
-	}
 	private void UpdateHMDEvents()
 	{
 		while(OVRPlugin.PollEvent(ref eventDataBuffer))

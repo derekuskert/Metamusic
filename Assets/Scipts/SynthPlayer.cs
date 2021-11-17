@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SynthPlayer : MonoBehaviour
 {
-
+    OVRPassthroughLayer passthroughLayer;
     public double frequency = 440.0;
     [Range(0, 3)]
     public int nType = 1;
@@ -63,24 +63,14 @@ public class SynthPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        passthroughLayer = FindObjectOfType<OVRPassthroughLayer>();
+        passthroughLayer.edgeRenderingEnabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*if (OVRInput.Get(OVRInput.Button.One))
-        {
-            gain = volume;
-        }
-        else
-        {
-            gain = 0;
-        }
-        if (OVRInput.GetDown(OVRInput.Button.Two))
-        { 
-            frequency += frequency;
-        }*/
+        passthroughLayer.edgeColor = Color.HSVToRGB(Mathf.InverseLerp(0, 15000, (float)frequency), 1.0f, gain * 10);
     }
     private double w(double dHertz)
     {

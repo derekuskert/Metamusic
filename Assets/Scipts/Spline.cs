@@ -34,7 +34,7 @@ public class Spline : MonoBehaviour
         Line.startWidth = 0.05f;
         Line.endWidth = 0.05f;
 
-        passthroughLayer = FindObjectOfType<OVRPassthroughLayer>();
+        //passthroughLayer = FindObjectOfType<OVRPassthroughLayer>();
     }
 
 
@@ -50,12 +50,12 @@ public class Spline : MonoBehaviour
         if (isInteractedWith)
         {
             UpdateSynthPitch();
-            passthroughLayer.edgeRenderingEnabled = true;
+            //passthroughLayer.edgeRenderingEnabled = true;
             Synth.gain = Synth.volume;
         }
         else
         {
-            passthroughLayer.edgeRenderingEnabled = false;
+            //passthroughLayer.edgeRenderingEnabled = false;
             Synth.gain = 0;
         }
     }

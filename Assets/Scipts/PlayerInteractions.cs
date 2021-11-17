@@ -30,6 +30,13 @@ public class PlayerInteractions : MonoBehaviour
     {
         OverlappingSplineScript = other.transform.root.gameObject.GetComponent<Spline>();
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if(OverlappingSplineScript == other.transform.root.gameObject.GetComponent<Spline>())
+        {
+            OverlappingSplineScript = null;
+        }
+    }
 
     //Tells the spline that it's being interacted with and gives it the position to attach to.
     void Grab()
