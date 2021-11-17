@@ -7,23 +7,23 @@ public class SynthPlayer : MonoBehaviour
 
     public double frequency = 440.0;
     [Range(0, 3)]
-    public int nType = 0;
+    public int nType = 1;
     private double increment;
     private double phase;
     private double sampling_frequency = 48000.0;
 
     public float gain;
     public float volume = 0.1f;
-    private double Oscillator(double dHertz, double dTime, int nType)
+    private double Oscillator(double dHertz, int nType)
     {
         switch (nType)
         {
             case 0: //Sine wave
-                return Mathf.Sin((float)(w(dHertz) * dTime));
+                return Mathf.Sin((float)(w(dHertz)));
             case 1: //Square wave
-                return Mathf.Sin((float)(w(dHertz) * dTime)) > 0.0 ? 1.0 : -1.0;
+                return Mathf.Sin((float)(w(dHertz))) > 0.0f ? 1.0f : -1.0f;
             case 2: //Triangle wave
-                return Mathf.Asin((float)(w(dHertz) * dTime));
+                return Mathf.Asin((float)(w(dHertz)));
             case 3: //Anolog Saw wave
                 double dOutput = 0.0;
 
@@ -45,7 +45,7 @@ public class SynthPlayer : MonoBehaviour
         {
             phase += increment;
 
-            data[i] = (float) (gain * Oscillator(frequency, phase, nType));
+            data[i] = /*(float)(gain* Mathf.Sin((float)phase));*/gain * (float)Oscillator(phase, nType);
 
             if(channels == 2)
             {

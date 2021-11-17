@@ -26,6 +26,14 @@ public class Spline : MonoBehaviour
         splineCount = transform.childCount;
         splinePoint = new Vector3[splineCount];
 
+        // set the color of the line
+        Line.startColor = Color.blue;
+        Line.endColor = Color.blue;
+
+        // set width of the renderer
+        Line.startWidth = 0.05f;
+        Line.endWidth = 0.05f;
+
         passthroughLayer = FindObjectOfType<OVRPassthroughLayer>();
     }
 
@@ -33,14 +41,6 @@ public class Spline : MonoBehaviour
     private void Update()
     {
         UpdateSplinePointLocations();
-
-        // set the color of the line
-        Line.startColor = Color.blue;
-        Line.endColor = Color.green;
-
-        // set width of the renderer
-        Line.startWidth = 0.05f;
-        Line.endWidth = 0.05f;
 
         Line.SetPosition(0, splinePoint[0]);
         Line.SetPosition(1, splinePoint[2]);
@@ -79,10 +79,13 @@ public class Spline : MonoBehaviour
 
     private void UpdateSynthPitch()
     {
-        Synth.frequency = Mathf.Lerp(10, 11000,
-            Mathf.Clamp((Vector3.Distance(transform.GetChild(0).position, transform.GetChild(1).position) - 
-            Vector3.Distance(transform.GetChild(2).position, transform.GetChild(1).position)) / 
-            Vector3.Distance(transform.GetChild(2).position, transform.GetChild(0).position), 0, 1));
+        //Creates a value of -1 to 1 by calculating the 'control point' between the 2 ending points.
+        //This is then plugged into an inverse lerp which will produce a value between 0 and 1 for the lerp to use for determining the
+        //frequency of the synth
+        Synth.frequency = Mathf.Lerp(10, 11000,Mathf.InverseLerp(-1, 1,(
+                Vector3.Distance(transform.GetChild(2).position, transform.GetChild(1).position) - 
+                Vector3.Distance(transform.GetChild(0).position, transform.GetChild(1).position)
+            ) / Vector3.Distance(transform.GetChild(2).position, transform.GetChild(0).position)));
     }
 
     private void UpdateMeshes()
