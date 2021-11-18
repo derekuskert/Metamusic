@@ -7,6 +7,9 @@ public class PlayerInteractions : MonoBehaviour
     Spline OverlappingSplineScript;
     Spline SelectedSplineScript;
 
+    [SerializeField]
+    public GameObject VoiceManager;
+
     private bool flip = false;
 
     // Start is called before the first frame update
@@ -53,6 +56,11 @@ public class PlayerInteractions : MonoBehaviour
         SelectedSplineScript.isInteractedWith = true;
         SelectedSplineScript.objectToFollow = transform;
         SelectedSplineScript.InteractSynthNote();
+    }
+
+    void SetSustainAmp(float f)
+    {
+        SelectedSplineScript.Synth._envelope.SustainAmplitude = f;
     }
 
     //Derefernces the spline and tells the spline that it's no longer being interacted with.

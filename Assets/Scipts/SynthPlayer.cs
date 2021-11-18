@@ -17,7 +17,7 @@ public class SynthPlayer : MonoBehaviour
     public float gain;
     public float volume = 0.1f;
 
-    struct EnvelopeADSR
+    public struct EnvelopeADSR
     {
         public double AttackTime;
         public double DelayTime;
@@ -33,7 +33,7 @@ public class SynthPlayer : MonoBehaviour
         
     }
 
-    private EnvelopeADSR _envelope;
+    public EnvelopeADSR _envelope;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +46,8 @@ public class SynthPlayer : MonoBehaviour
         _envelope.StartAmplitude = 1.2;
         _envelope.SustainAmplitude = 0.9;
         _envelope.ReleaseTime = 0.5;
+        
+        
         _envelope.TriggerOnTime = 0;
         _envelope.TriggerOffTime = 0;
         _envelope.NoteOn = false;
@@ -109,22 +111,24 @@ public class SynthPlayer : MonoBehaviour
         _envelope.NoteOn = false;
         _envelope.TriggerOffTime = timeOff;
     }
-    private double Oscillator(double dHertz, int OscillatorType = 0)
+
+    private double Oscillator(double dHertz, double  time, int OscillatorType = 0, double modulationHertz = 0, double modulationAmplitude = 0)
     {
+        double freq = w(dHertz) + modulationAmplitude * dHertz * Mathf.Sin((float)(w(modulationHertz) * time));
         switch (OscillatorType)
         {
             case 0: //Sine wave
-                return Mathf.Sin((float)(w(dHertz)));
+                return Mathf.Sin((float)(w(freq)));
             case 1: //Square wave
-                return Mathf.Sin((float)(w(dHertz))) > 0.0f ? 1.0f : -1.0f;
+                return Mathf.Sin((float)(w(freq))) > 0.0f ? 1.0f : -1.0f;
             case 2: //Triangle wave
-                return Mathf.Asin((float)(w(dHertz)));
+                return Mathf.Asin((float)(w(freq)));
             case 3: //Anolog Saw wave
                 double dOutput = 0.0;
 
                 for (double n = 1.0; n < 100.0; n++)
                 {
-                    dOutput += (Mathf.Sin((float)(n * w(dHertz) * _phase)) / n);
+                    dOutput += (Mathf.Sin((float)(n * w(freq) * _phase)) / n);
                 }
                 return dOutput * (2 / Mathf.PI);
             default:
@@ -140,8 +144,8 @@ public class SynthPlayer : MonoBehaviour
         for(int i = 0; i < data.Length; i += channels)
         {
             _phase += _increment;
-
-            data[i] = /*(float)(gain* Mathf.Sin((float)phase));*/(float)_amp * 0.1f * (float)Oscillator(_phase, nType);
+            
+            data[i] = /*(float)(gain* Mathf.Sin((float)phase));*/(float)_amp * 0.1f * (float)Oscillator(_phase, AudioSettings.dspTime, 0, 1, 1);
 
             if(channels == 2)
             {

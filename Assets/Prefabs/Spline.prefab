@@ -143,7 +143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Synth: {fileID: 5771331382205784058}
-  debug_drawspline: 1
   isInteractedWith: 0
   Line: {fileID: 731005780}
   objectToFollow: {fileID: 0}
@@ -386,7 +385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.075
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
       propertyPath: m_LocalScale.y
@@ -394,7 +393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.075
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
       propertyPath: m_LocalPosition.x
@@ -478,7 +477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.075
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
       propertyPath: m_LocalScale.y
@@ -486,7 +485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.075
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
       propertyPath: m_LocalPosition.x

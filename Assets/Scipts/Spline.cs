@@ -6,7 +6,7 @@ using UnityEngine;
 public class Spline : MonoBehaviour
 {
     [SerializeField]
-    private SynthPlayer Synth;
+    public SynthPlayer Synth;
 
     private OVRPassthroughLayer passthroughLayer;
 
