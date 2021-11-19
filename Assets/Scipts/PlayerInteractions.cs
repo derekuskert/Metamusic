@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Facebook.WitAi;
+using Oculus.Voice;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerInteractions : MonoBehaviour
 {
     Spline OverlappingSplineScript;
     Spline SelectedSplineScript;
+
+    [SerializeField] public AppVoiceExperience wit;
 
     [SerializeField]
     public GameObject VoiceManager;
@@ -15,7 +20,7 @@ public class PlayerInteractions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //if (!wit) wit = FindObjectOfType<Wit>();
     }
 
     // Update is called once per frame
@@ -29,8 +34,13 @@ public class PlayerInteractions : MonoBehaviour
         {
             Release();
         }
-    }
 
+        if (OVRInput.GetDown(OVRInput.Button.Four) || Input.GetKeyDown(KeyCode.Space))
+        {
+            wit.Activate();
+        }
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         OverlappingSplineScript = other.transform.root.gameObject.GetComponent<Spline>();
@@ -58,9 +68,13 @@ public class PlayerInteractions : MonoBehaviour
         SelectedSplineScript.InteractSynthNote();
     }
 
-    void SetSustainAmp(float f)
+    public void SetASDR(string[] values)
     {
-        SelectedSplineScript.Synth._envelope.SustainAmplitude = f;
+        foreach (string str in values)
+        {
+            Debug.Log(str + " ");
+        }
+        SelectedSplineScript.Synth.SetADSR(values[1],values[0]);
     }
 
     //Derefernces the spline and tells the spline that it's no longer being interacted with.

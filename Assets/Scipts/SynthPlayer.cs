@@ -56,7 +56,7 @@ public class SynthPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _passthroughLayer.edgeColor = Color.HSVToRGB(Mathf.InverseLerp(0, 15000, (float)frequency), 1.0f, gain * 10);
+        _passthroughLayer.edgeColor = Color.HSVToRGB(Mathf.InverseLerp(0, 15000, (float)frequency), 1.0f, (float)_amp);
         _amp = GetAmplitude(Time.time);
     }
     private double w(double dHertz)
@@ -112,6 +112,54 @@ public class SynthPlayer : MonoBehaviour
         _envelope.TriggerOffTime = timeOff;
     }
 
+    public void SetADSR(String type, String value)
+    {
+        switch (type)
+        {
+            case "attack":
+                switch (value)
+                {
+                    case "Low": _envelope.AttackTime = 0.1; break;
+                    case "Medium": _envelope.AttackTime = 0.3; break;
+                    case "High": _envelope.AttackTime = 1; break;
+                }
+                break;
+            case "decay":
+                switch (value)
+                {
+                    case "Low": _envelope.DelayTime = 0; break;
+                    case "Medium": _envelope.DelayTime = 0.05; break;
+                    case "High": _envelope.DelayTime = 0.7; break;
+                }
+                break;
+            case "sustain":
+                switch (value)
+                {
+                    case "Low": _envelope.SustainAmplitude = 0.1; break;
+                    case "Medium": _envelope.SustainAmplitude = 0.5; break;
+                    case "High": _envelope.SustainAmplitude = 1.0; break;
+                }
+                break;
+            case "release":
+                switch (value)
+                {
+                    case "Low": _envelope.ReleaseTime = 0.1; break;
+                    case "Medium": _envelope.ReleaseTime = 0.5; break;
+                    case "High": _envelope.ReleaseTime = 3; break;
+                }
+                break;
+            case "start amplitude":
+                switch (value)
+                {
+                    case "Low": _envelope.StartAmplitude = 0.13; break;
+                    case "Medium": _envelope.StartAmplitude = 0.7; break;
+                    case "High": _envelope.StartAmplitude = 1.2; break;
+                }
+                break;
+            default:
+                break;
+        }
+    }
     private double Oscillator(double dHertz, double  time, int OscillatorType = 0, double modulationHertz = 0, double modulationAmplitude = 0)
     {
         double freq = w(dHertz) + modulationAmplitude * dHertz * Mathf.Sin((float)(w(modulationHertz) * time));

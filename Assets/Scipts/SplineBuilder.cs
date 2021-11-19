@@ -37,7 +37,7 @@ public class SplineBuilder : MonoBehaviour
                 Destroy(_hit.transform.root.gameObject);
             }
         }
-        if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0.5 || Input.GetKeyDown(KeyCode.Space))
+        if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0.5)
         {
             if (_flip)
             {

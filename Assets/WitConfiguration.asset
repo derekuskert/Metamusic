@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae5a46bda3295124c99b0e6537ac7252, type: 3}
-  m_Name: Shapes Demo - WitConfiguration
+  m_Name: WitConfiguration
   m_EditorClassIdentifier: 
   application:
     witConfiguration: {fileID: 0}
@@ -19,7 +19,7 @@ MonoBehaviour:
     lang: en
     isPrivate: 0
     createdAt: 2021-11-18T12:12:07-0800
-  configId: 4e21a24e472ab684e84db753427d5687
+  configId: 3a6c71ed9b134ce4aadab7ddd1ed41cb
   clientAccessToken: JTZXSR6FBPQBE555FWR3E7V2EINQND63
   entities:
   - witConfiguration: {fileID: 11400000}
@@ -31,10 +31,14 @@ MonoBehaviour:
     roles:
     - 
     keywords:
+    - keyword: amp
+      synonyms:
+      - amp
     - keyword: attack
       synonyms:
       - attack
       - attack time
+      - start amp time
     - keyword: decay
       synonyms:
       - decay
@@ -55,34 +59,38 @@ MonoBehaviour:
       - sustain amp
       - sustain amplitude
   - witConfiguration: {fileID: 11400000}
-    id: 426697688985716
-    name: Set
+    id: 291620366175015
+    name: Change-Type
     lookups:
     - free-text
     - keywords
     roles:
     - 
     keywords:
-    - keyword: set
+    - keyword: Set
       synonyms:
       - appoint
-      - determine
+      - change
       - make
       - set
-  - witConfiguration: {fileID: 11400000}
-    id: 286437313388008
-    name: increase
-    lookups:
-    - free-text
-    - keywords
-    roles:
-    - 
-    keywords:
+    - keyword: decrease
+      synonyms:
+      - decrease
+      - deduct
+      - knock off
+      - lessen
+      - lower
+      - minus
+      - reduce
     - keyword: increase
       synonyms:
       - add
-      - change
+      - boost
+      - give
       - increase
+      - induce
+      - inflate
+      - raise
   - witConfiguration: {fileID: 11400000}
     id: 877738879569761
     name: value
@@ -98,20 +106,37 @@ MonoBehaviour:
     - keyword: 0.007
       synonyms:
       - 0.007
+    - keyword: 0.01
+      synonyms:
+      - 0.01
     - keyword: 0.1
       synonyms:
       - 0.1
-  - witConfiguration: {fileID: 11400000}
-    id: 535a810f-8911-4bfe-976a-6e3c193f1251
-    name: wit$datetime
-    lookups: []
-    roles:
-    - 
-    keywords: []
+    - keyword: 0.2
+      synonyms:
+      - 0.2
+    - keyword: 0.28
+      synonyms:
+      - 0.28
+    - keyword: 0.3
+      synonyms:
+      - 0.3
+    - keyword: 0.6
+      synonyms:
+      - 0.6
+    - keyword: 0.8
+      synonyms:
+      - 0.8
+    - keyword: 1
+      synonyms:
+      - 1
+    - keyword: 3
+      synonyms:
+      - 3
   intents:
   - witConfiguration: {fileID: 11400000}
-    id: 622210858903921
-    name: increase_ADSR_value
+    id: 180544037622761
+    name: Change_ADSR_Value
     entities:
     - witConfiguration: {fileID: 11400000}
       id: 416737593363246
@@ -120,8 +145,8 @@ MonoBehaviour:
       roles: []
       keywords: []
     - witConfiguration: {fileID: 11400000}
-      id: 187501433580128
-      name: increase:increase
+      id: 187593870218381
+      name: Change-Type:Change-Type
       lookups: []
       roles: []
       keywords: []
@@ -131,8 +156,4 @@ MonoBehaviour:
       lookups: []
       roles: []
       keywords: []
-  - witConfiguration: {fileID: 11400000}
-    id: 882894875927404
-    name: set_ADSR_value
-    entities: []
   traits: []
