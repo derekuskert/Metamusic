@@ -43,6 +43,7 @@ public class PlayerInteractions : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        if (SelectedSplineScript) return;
         OverlappingSplineScript = other.transform.root.gameObject.GetComponent<Spline>();
     }
     private void OnTriggerExit(Collider other)
