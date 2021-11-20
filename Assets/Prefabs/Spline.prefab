@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1684371635}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EndingSplinePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2093385095423071573}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ControlSplinePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8460802296569705993}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: StartingSplinePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 570666456153410538}
   - component: {fileID: 5771331382205784058}
   - component: {fileID: 8269776736595900577}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Spline
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -439,6 +439,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cylinder_Indigo (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779745573541866595, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
 --- !u!1 &2494399340079988432 stripped
@@ -530,6 +538,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
       propertyPath: m_Name
       value: Cylinder_Indigo
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779745573541866595, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19e72d7c8f3a19841a0630a7db5b4720, type: 3}
