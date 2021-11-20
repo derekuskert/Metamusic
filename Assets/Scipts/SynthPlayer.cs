@@ -13,6 +13,8 @@ public class SynthPlayer : MonoBehaviour
     private double _phase;
     private double sampling_frequency = 48000.0;
     private double _amp;
+
+    private bool flip;
     
     public float gain;
     public float volume = 0.1f;
@@ -56,7 +58,16 @@ public class SynthPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _passthroughLayer.edgeColor = Color.HSVToRGB(Mathf.InverseLerp(0, 15000, (float)frequency), 1.0f, (float)_amp);
+        if (_amp != 0)
+        {
+            flip = true;
+            _passthroughLayer.edgeColor = Color.HSVToRGB(Mathf.InverseLerp(0, 15000, (float)frequency), 1.0f, (float)_amp);
+        }else if (flip)
+        {
+            flip = false;
+            _passthroughLayer.edgeColor = Color.HSVToRGB(Mathf.InverseLerp(0, 15000, (float)frequency), 1.0f, 0);
+        }
+
         _amp = GetAmplitude(Time.time);
     }
     private double w(double dHertz)
