@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Facebook.WitAi;
@@ -40,12 +41,15 @@ public class PlayerInteractions : MonoBehaviour
             wit.Activate();
         }
     }
-    
-    private void OnTriggerEnter(Collider other)
+
+
+    private void OnTriggerStay(Collider other)
     {
+        if (!other.transform.root.gameObject.GetComponent<Spline>()) return;
         if (SelectedSplineScript) return;
         OverlappingSplineScript = other.transform.root.gameObject.GetComponent<Spline>();
     }
+
     private void OnTriggerExit(Collider other)
     {
         if(OverlappingSplineScript == other.transform.root.gameObject.GetComponent<Spline>())
@@ -58,14 +62,16 @@ public class PlayerInteractions : MonoBehaviour
     void Grab()
     {
         if (flip) return;
+        
+        if (!OverlappingSplineScript) return;
+        
+        SelectedSplineScript = OverlappingSplineScript;
+        
+        SelectedSplineScript.isInteractedWith = true; 
+        SelectedSplineScript.objectToFollow = transform;
 
         flip = true;
-        if (!OverlappingSplineScript) return;
 
-        SelectedSplineScript = OverlappingSplineScript;
-
-        SelectedSplineScript.isInteractedWith = true;
-        SelectedSplineScript.objectToFollow = transform;
         SelectedSplineScript.InteractSynthNote();
     }
 

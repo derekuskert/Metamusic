@@ -276,6 +276,8 @@ MonoBehaviour:
   nType: 0
   gain: 0
   volume: 0.1
+  useNotes: 1
+  octaveLevel: 3
 --- !u!82 &8269776736595900577
 AudioSource:
   m_ObjectHideFlags: 0

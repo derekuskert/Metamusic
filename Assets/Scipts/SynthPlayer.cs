@@ -18,6 +18,8 @@ public class SynthPlayer : MonoBehaviour
     
     public float gain;
     public float volume = 0.1f;
+    public bool useNotes = false;
+    public int octaveLevel = 4;
 
     public struct EnvelopeADSR
     {
@@ -61,11 +63,11 @@ public class SynthPlayer : MonoBehaviour
         if (_amp != 0)
         {
             flip = true;
-            _passthroughLayer.edgeColor = Color.HSVToRGB(Mathf.InverseLerp(0, 15000, (float)frequency), 1.0f, (float)_amp);
+            _passthroughLayer.edgeColor = Color.HSVToRGB(Mathf.InverseLerp(0, (float)(30.87 * (octaveLevel > 1 ? Mathf.Pow(2, octaveLevel - 1) : 1)), (float)frequency), 1.0f, (float)_amp);
         }else if (flip)
         {
             flip = false;
-            _passthroughLayer.edgeColor = Color.HSVToRGB(Mathf.InverseLerp(0, 15000, (float)frequency), 1.0f, 0);
+            _passthroughLayer.edgeColor = Color.HSVToRGB(Mathf.InverseLerp(0, (float)(30.87 * (octaveLevel > 1 ? Mathf.Pow(2, octaveLevel - 1) : 1)), (float)frequency), 1.0f, 0);
         }
 
         _amp = GetAmplitude(Time.time);
@@ -204,7 +206,7 @@ public class SynthPlayer : MonoBehaviour
         {
             _phase += _increment;
             
-            data[i] = /*(float)(gain* Mathf.Sin((float)phase));*/(float)_amp * 0.1f * (float)Oscillator(_phase, AudioSettings.dspTime, 0, 1, 1);
+            data[i] = /*(float)(gain* Mathf.Sin((float)phase));*/(float)_amp * 0.1f * (float)Oscillator(_phase, AudioSettings.dspTime, 0, 0, 0.00);
 
             if(channels == 2)
             {

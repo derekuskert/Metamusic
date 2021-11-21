@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class SplineBuilder : MonoBehaviour
     private bool _flip;
 
     private GameObject _newSpline = null;
+
+    private Spline OverlappingSplineScript;
 
     public GameObject splinePrefab;
 
@@ -27,14 +30,26 @@ public class SplineBuilder : MonoBehaviour
         
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (!other.transform.root.gameObject.GetComponent<Spline>()) return;
+
+        OverlappingSplineScript = other.transform.root.gameObject.GetComponent<Spline>();
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        OverlappingSplineScript = null;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (OVRInput.GetDown(OVRInput.Button.One))
         {
-            if (_hit.transform.root.gameObject.GetComponent<Spline>())
+            if (OverlappingSplineScript)
             {
-                Destroy(_hit.transform.root.gameObject);
+                Destroy(OverlappingSplineScript.gameObject.transform.root.gameObject);
             }
         }
         if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0.5)
