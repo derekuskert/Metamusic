@@ -96,4 +96,23 @@ public class PlayerInteractions : MonoBehaviour
         SelectedSplineScript.InteractSynthNote();
         SelectedSplineScript = null;
     }
+    
+    public void SetOctave(string[] values)
+    {
+        foreach (string str in values)
+        {
+            Debug.Log(str + " ");
+        }
+
+        switch (values[1])
+        {
+            case "Set":
+                SelectedSplineScript.Synth.octaveLevel = int.Parse(values[0]);
+                break;
+            default:
+                SelectedSplineScript.Synth.octaveLevel = int.Parse(values[0]);
+                break;
+        }
+
+    }
 }
