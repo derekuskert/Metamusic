@@ -206,7 +206,7 @@ public class SynthPlayer : MonoBehaviour
         {
             _phase += _increment;
             
-            data[i] = /*(float)(gain* Mathf.Sin((float)phase));*/(float)_amp * 0.1f * (float)Oscillator(_phase, AudioSettings.dspTime, 0, 0, 0.00);
+            data[i] = (float)_amp * 0.1f * (float)Oscillator(_phase, AudioSettings.dspTime, nType, 0, 0.00);
 
             if(channels == 2)
             {

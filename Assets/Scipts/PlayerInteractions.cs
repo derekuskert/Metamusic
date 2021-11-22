@@ -113,6 +113,27 @@ public class PlayerInteractions : MonoBehaviour
                 SelectedSplineScript.Synth.octaveLevel = int.Parse(values[0]);
                 break;
         }
+    }
 
+    public void SetOscillator(string[] values)
+    {
+        if (!SelectedSplineScript) return;
+
+        switch (values[0])
+        {
+            case "Sine":
+                SelectedSplineScript.Synth.nType = 0;
+                break;
+            case "Square":
+                SelectedSplineScript.Synth.nType = 1;
+                break;
+            case "Triangle":
+                SelectedSplineScript.Synth.nType = 2;
+                break;
+            case "Saw":
+                SelectedSplineScript.Synth.nType = 3;
+                break;
+        }
+        
     }
 }
