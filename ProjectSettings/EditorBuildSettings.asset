@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Oculus/SampleFramework/Usage/Passthrough/Scenes/AugmentedObjects.unity
-    guid: 9afeada2bbd240b4981cfb6abb525418
+  - enabled: 1
+    path: Assets/Oculus/SampleFramework/Usage/Passthrough/Scenes/PassthroughStyles.unity
+    guid: a1a6574991742284e9630c2e8f93648a
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 1c9fbb5cd87738c48ba32f3469cadd1c, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: abacb8828a5afc04d8c34473faeeeff9, type: 2}
