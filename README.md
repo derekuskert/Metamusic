@@ -1,20 +1,20 @@
 # Metamusic
 XR Hackathon entry
 
-# About Metamusic
-Metamusic is an app that utalizes voice to control synths instead of using complex knobs and dials.
+## About Metamusic
+Metamusic is an app that allows the player to create a unique vr instrument based on a procedural string that utilizes voice to control synths instead of using complex knobs and dials.
 
 Simply imply what you want with some keywords while the mic is activated, and it's done without any
 hands on effort.
 
-This shows the ability to have **0** menus and still have versatility with just basic interaction,
+This shows the ability to have **0 menus** and still have versatility with just basic interaction,
 and the power of your voice.
 
-# How to build from project
+## How to build from project
 
 simply go to 'file>build and run' while your quest 2 is plugged in.
 
-# How to play
+## How to play
 1)Use the quest controllers to point at a point to where you want your synth spline to begin, then pull the right index trigger.
 
 2)Point to the next location and pull on the right index trigger again to set the second position.
